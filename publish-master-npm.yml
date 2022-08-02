@@ -14,14 +14,12 @@ jobs:
       ${{ github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'area/extension') }}
     strategy:
       matrix:
-        node-version: [16.x]
     steps:
       - name: Checkout Release
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: Using Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
@@ -31,8 +29,6 @@ jobs:
           make build-npm
 
       - name: publish new release
-        run: |
-          make publish-npm
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_RELEASE_TAG: master
