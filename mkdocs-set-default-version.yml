@@ -10,7 +10,6 @@ jobs:
     name: Update default docs Version
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Python 3.7
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
@@ -21,7 +20,6 @@ jobs:
           pip install git+https://${{ secrets.GH_TOKEN }}@github.com/lensapp/mkdocs-material-insiders.git
           pip install mike
           
-      - name: Checkout Release from lens
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
